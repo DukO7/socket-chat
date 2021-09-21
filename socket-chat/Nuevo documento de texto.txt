@@ -1,0 +1,18 @@
+<?php
+$user=$_POST['user'];
+$pass=$_POST['pass'];
+include "conexion.php";
+$consulta="SELECT * FROM usuario WHERE user='".$user."' and pass='".$pass."'";
+$resultado=pg_query($con,$consulta);
+
+$filas=pg_num_rows($resultado);
+
+if ($filas>0) {
+	header("location:ModuloP2.php");
+	echo "correcto";
+}
+else{
+	echo "Error al logear";
+}
+pg_free_result($resultado);
+pg_close($con);
